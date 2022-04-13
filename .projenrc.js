@@ -64,6 +64,8 @@ additionalActions = [
   },
 ];
 
+
+
 project.buildWorkflow.preBuildSteps.unshift(...additionalActions);
 
 console.log(project.github.workflows.map((wr) => wr.name));
@@ -109,8 +111,8 @@ fixme.forEach((wf) => {
         },
       },
       {
-        name: 'Fetch all tags',
-        run: 'git fetch --force --tags',
+        name: 'env',
+        run: 'env',
       },
       {
         name: 'Test',
@@ -147,13 +149,13 @@ fixme.forEach((wf) => {
     steps: [
       {
         name: 'Prepare',
-        run: 'apk add zip git',
+        run: 'apk add zip git@2.34.1',
       },
       {
         name: 'Checkout',
         uses: 'actions/checkout@v2',
         with: {
-          'fetch-depth': 0,
+          'fetch-depth': 1,
         },
       },
       {
